@@ -6,11 +6,21 @@ import {
   Input
 } from "../components/styles/StyledTodoForm";
 
-const TodoForm = () => {
+const TodoForm = ({ addTodo, setAlert }) => {
   const [value, setValue] = useState("");
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (!value) {
+      setAlert(true);
+    } else {
+      addTodo(value);
+      setValue("");
+    }
+  };
+
   return (
-    <StyledTodoForm class='todo__form' autocomplete='off'>
+    <StyledTodoForm autocomplete='off' onSubmit={handleFormSubmit}>
       <SubmitButton type='submit'></SubmitButton>
       <Label htmlFor='add'></Label>
       <Input

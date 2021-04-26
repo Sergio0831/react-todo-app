@@ -1,6 +1,6 @@
 import styled from "styled-components/macro";
 
-export const StyledTodoContainer = styled.div`
+export const TodoContainer = styled.div`
   max-width: 54rem;
   width: 100%;
   position: absolute;
@@ -16,7 +16,7 @@ export const StyledTodoContainer = styled.div`
 
 export const TodoHeader = styled.div`
   display: flex;
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
   justify-content: space-between;
   align-items: center;
 

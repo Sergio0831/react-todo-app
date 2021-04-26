@@ -1,10 +1,9 @@
 import styled from "styled-components/macro";
 
-export const StyledTodoAction = styled.div`
+export const TodoAction = styled.div`
   width: 100%;
   margin-top: 2.4rem;
-  background: ${(props) => props.theme.todoActionBg};
-  box-shadow: 0px 35px 50px -15px ${(props) => props.theme.boxShadow};
+  box-shadow: 0 3.5rem 5rem -1.5rem ${(props) => props.theme.boxShadow};
   border-radius: 5px;
   transition: all 0.5s ease;
 `;
@@ -14,6 +13,7 @@ export const TodoActionFooter = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1.6rem 2.4rem;
+  background: ${(props) => props.theme.todoActionBg};
 `;
 
 export const ItemsLeft = styled.p`

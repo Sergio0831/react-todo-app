@@ -12,13 +12,19 @@ import TodoForm from "./TodoForm";
 import TodoAction from "./TodoAction";
 
 export default function TodoContainer({ onToggleClick, nightMode }) {
-  const icon = nightMode ? <IconMoon /> : <IconSun />;
+  const icon = nightMode ? <IconSun /> : <IconMoon />;
 
   return (
     <StyledTodoContainer>
       <TodoHeader nightMode={nightMode}>
         <Title>todo</Title>
-        <Switcher onClick={onToggleClick} nightMode={nightMode}>
+        <Switcher
+          type='button'
+          aria-label='alternative for screen readers'
+          title='alternative for other users'
+          onClick={onToggleClick}
+          nightMode={nightMode}
+        >
           {icon}
         </Switcher>
       </TodoHeader>

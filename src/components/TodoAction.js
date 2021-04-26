@@ -8,11 +8,12 @@ import {
   FilterButton,
   CompletedButton
 } from "./styles/StyledTodoAction";
+import TodoList from "./TodoList";
 
 export default function TodoAction() {
   return (
     <StyledTodoAction>
-      <ul class='todo__list'></ul>
+      <TodoList />
       <TodoActionFooter>
         <ItemsLeft>5 items left</ItemsLeft>
         <FilterList>
