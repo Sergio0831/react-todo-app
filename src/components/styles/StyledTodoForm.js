@@ -1,6 +1,6 @@
 import styled from "styled-components/macro";
 
-export const TodoForm = styled.form`
+export const StyledTodoForm = styled.form`
   display: flex;
   align-items: center;
 `;
@@ -33,7 +33,7 @@ export const Input = styled.input`
   color: ${(props) => props.theme.inputTypingColor};
   outline: none;
   caret-color: #3a7cfd;
-  background: ${(props) => props.theme.todoBgColor};
+  background-color: ${(props) => props.theme.todoBgColor};
   box-sizing: border-box;
   box-shadow: 0 3.5rem 5rem -1.5rem ${(props) => props.theme.boxShadow};
   border-radius: 5px;

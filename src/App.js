@@ -6,35 +6,34 @@ import IconMoon from "./components/IconMoon";
 import IconSun from "./components/IconSun";
 import { StyledAlert, Text } from "./components/styles/StyledAlert";
 import {
-  CompletedButton,
-  FilterButton,
-  FilterItem,
-  FilterList,
-  ItemsLeft,
-  TodoAction,
-  TodoActionFooter
-} from "./components/styles/StyledTodoAction";
-import {
   FooterText,
   Switcher,
   Title,
   TodoContainer,
   TodoHeader
 } from "./components/styles/StyledTodoContainer";
-import {
-  Input,
-  SubmitButton,
-  Label,
-  TodoForm
-} from "./components/styles/StyledTodoForm";
 import { themeDark, themeLight } from "./components/theme/theme";
+import audioOn from "./audio/light-on.mp3";
+import audioOff from "./audio/light-off.mp3";
+import useSound from "use-sound";
 import TodoList from "./components/TodoList";
-import { useId } from "react-id-generator";
+import TodoForm from "./components/TodoForm";
+import TodoAction from "./components/TodoAction";
+import TodoActionFooter from "./components/TodoActionFooter";
 
-export default function App() {
+const App = () => {
   const [nightMode, setNightMode] = useState(
     () => localStorage.getItem("night_mode") === "true"
   );
+
+  const [sound, setSound] = useState(new Audio(audioOff));
+  const [playOn] = useSound(audioOn, { volume: 0.25 });
+  const [playOff] = useSound(audioOff, { volume: 0.25 });
+
+  const playSound = () => {
+    nightMode ? playOn() : playOff();
+  };
+
   const [todos, setTodos] = useState(() => {
     const savedTodos = localStorage.getItem("todos");
     if (savedTodos) {
@@ -43,36 +42,12 @@ export default function App() {
       return [];
     }
   });
-  const [value, setValue] = useState("");
+
   const [alert, setAlert] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
   const icon = nightMode ? <IconSun /> : <IconMoon />;
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-
-    if (!value) {
-      setAlert(true);
-    } else {
-      setTodos([
-        ...todos,
-        {
-          id: todos.length + 1,
-          value: value,
-          isCompleted: isCompleted
-        }
-      ]);
-      setValue("");
-    }
-  };
 
   const handleToggleClick = () => {
     setNightMode(!nightMode);
-  };
-
-  const handleDeleteClick = (id) => {
-    const newTodos = todos.filter((todo) => todo.id !== id);
-    setTodos(newTodos);
   };
 
   useEffect(() => {
@@ -96,7 +71,6 @@ export default function App() {
           <Text>Add Todo</Text>
         </StyledAlert>
         <Header />
-        {/* Todo Container */}
         <TodoContainer>
           <TodoHeader nightMode={nightMode}>
             <Title>todo</Title>
@@ -104,56 +78,30 @@ export default function App() {
               type='button'
               aria-label='alternative for screen readers'
               title='alternative for other users'
-              onClick={handleToggleClick}
+              onClick={() => {
+                playSound();
+                handleToggleClick();
+              }}
               nightMode={nightMode}
             >
               {icon}
             </Switcher>
           </TodoHeader>
-          {/* Todo Form */}
           <TodoForm
             autocomplete='off'
-            onSubmit={handleFormSubmit}
             setAlert={setAlert}
-          >
-            <SubmitButton type='submit'></SubmitButton>
-            <Label htmlFor='add'></Label>
-            <Input
-              id='add'
-              type='text'
-              placeholder='Create a new todo…'
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              autoFocus
-            />
-          </TodoForm>
-          {/* Todo Form End */}
-          {/* Todo Action */}
+            setTodos={setTodos}
+            todos={todos}
+          />
           <TodoAction>
-            {/* Todo List */}
-            <TodoList todos={todos} onDeleteClick={handleDeleteClick} />
-            {/* Todo List End */}
-            <TodoActionFooter>
-              <ItemsLeft>{todos.length} items left</ItemsLeft>
-              <FilterList>
-                <FilterItem>
-                  <FilterButton>All</FilterButton>
-                </FilterItem>
-                <FilterItem>
-                  <FilterButton>Active</FilterButton>
-                </FilterItem>
-                <FilterItem>
-                  <FilterButton>Completed</FilterButton>
-                </FilterItem>
-              </FilterList>
-              <CompletedButton>Clear Completed</CompletedButton>
-            </TodoActionFooter>
+            <TodoList todos={todos} setTodos={setTodos} />
+            <TodoActionFooter todos={todos} />
           </TodoAction>
-          {/* Todo Action end */}
           <FooterText>Drag and drop to reorder list</FooterText>
         </TodoContainer>
-        {/* Todo Container End */}
       </Container>
     </ThemeProvider>
   );
-}
+};
+
+export default App;

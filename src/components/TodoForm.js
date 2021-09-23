@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 } from "uuid";
 import {
   StyledTodoForm,
   SubmitButton,
@@ -6,15 +7,24 @@ import {
   Input
 } from "../components/styles/StyledTodoForm";
 
-const TodoForm = ({ addTodo, setAlert }) => {
+const TodoForm = ({ setTodos, todos, setAlert }) => {
   const [value, setValue] = useState("");
+  const [isCompleted, setIsCompleted] = useState(false);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+
     if (!value) {
       setAlert(true);
     } else {
-      addTodo(value);
+      setTodos([
+        ...todos,
+        {
+          id: v4(),
+          value: value,
+          isCompleted: isCompleted
+        }
+      ]);
       setValue("");
     }
   };

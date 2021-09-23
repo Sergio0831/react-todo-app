@@ -10,31 +10,52 @@ import {
 } from "./styles/StyledTodoList";
 import CrossIcon from "./CrossIcon";
 
-export default function TodoList({
-  todos,
-  onDeleteClick,
-  showTodo,
-  setShowTodo
-}) {
+const TodoList = ({ todos, setTodos, showTodo }) => {
+  const handleDeleteClick = (id) => {
+    const newTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(newTodos);
+  };
+
+  const toggleTodoCompleted = (id) => {
+    const updatedTodo = todos.map((todo) => {
+      if (id === todo.id) {
+        return { ...todo, isCompleted: !todo.isCompleted };
+      }
+      return todo;
+    });
+    setTodos(updatedTodo);
+  };
+
   return (
     <StyledTodoList>
-      {todos.map((todo) => (
-        <Todo key={todo.id} showTodo={showTodo}>
-          <Label>
-            <Checkbox type='checkbox' id='checkbox' name='complete' />
-            <CustomCheckbox class='custom-checkbox'></CustomCheckbox>
-            <TodoText>{todo.value}</TodoText>
-          </Label>
-          <DeleteButton
-            type='button'
-            aria-label='alternative for screen readers'
-            title='alternative for other users'
-            onClick={() => onDeleteClick(todo.id)}
-          >
-            <CrossIcon />
-          </DeleteButton>
-        </Todo>
-      ))}
+      {todos.map((todo) => {
+        const { id, value, isCompleted } = todo;
+        return (
+          <Todo key={id} showTodo={showTodo}>
+            <Label htmlFor={id}>
+              <Checkbox
+                type='checkbox'
+                id={id}
+                name='complete'
+                defaultChecked={isCompleted}
+                onChange={() => toggleTodoCompleted(id)}
+              />
+              <CustomCheckbox class='custom-checkbox'></CustomCheckbox>
+              <TodoText isCompleted={isCompleted}>{value}</TodoText>
+            </Label>
+            <DeleteButton
+              type='button'
+              aria-label='alternative for screen readers'
+              title='alternative for other users'
+              onClick={() => handleDeleteClick(id)}
+            >
+              <CrossIcon />
+            </DeleteButton>
+          </Todo>
+        );
+      })}
     </StyledTodoList>
   );
-}
+};
+
+export default TodoList;

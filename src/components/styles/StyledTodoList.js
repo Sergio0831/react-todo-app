@@ -43,7 +43,8 @@ export const Label = styled.label`
 `;
 
 export const TodoText = styled.span`
-  color: ${(props) => props.theme.todoColor};
+  color: ${(props) =>
+    props.isCompleted ? props.theme.completedTodoColor : props.theme.todoColor};
   cursor: pointer;
   user-select: none;
   line-height: 1.5;
@@ -53,15 +54,16 @@ export const TodoText = styled.span`
 
   &::before {
     content: "";
+    left: ${(props) => (props.isCompleted ? "0" : "")};
     position: absolute;
-    left: 0;
-    top: 50%;
-    width: 0;
+    width: ${(props) => (props.isCompleted ? "100%" : "0")};
     height: 1px;
-    background-color: ${(props) => props.theme.completedTodoColor};
-    transform-origin: left;
-    transition: all 0.5s ease;
-    transform: translateY(-50%);
+    top: calc(50% - 1px);
+    transition: inherit;
+    background: ${(props) =>
+      props.isCompleted
+        ? props.theme.completedTodoColor
+        : props.theme.todoColor};
   }
 `;
 
@@ -135,14 +137,6 @@ export const Checkbox = styled.input`
   &:checked + ${CustomCheckbox} {
     ::before {
       opacity: 1;
-    }
-  }
-
-  &:checked + ${TodoText} {
-    color: ${(props) => props.theme.completedTodoColor};
-
-    &:before {
-      width: 100%;
     }
   }
 
