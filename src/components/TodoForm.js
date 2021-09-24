@@ -30,7 +30,7 @@ const TodoForm = ({ setTodos, todos, setAlert }) => {
   };
 
   return (
-    <StyledTodoForm autocomplete='off' onSubmit={handleFormSubmit}>
+    <StyledTodoForm autoComplete='off' onSubmit={handleFormSubmit}>
       <SubmitButton type='submit'></SubmitButton>
       <Label htmlFor='add'></Label>
       <Input
@@ -40,6 +40,7 @@ const TodoForm = ({ setTodos, todos, setAlert }) => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         autoFocus
+        autoComplete='off'
       />
     </StyledTodoForm>
   );

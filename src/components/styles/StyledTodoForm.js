@@ -3,6 +3,7 @@ import styled from "styled-components/macro";
 export const StyledTodoForm = styled.form`
   display: flex;
   align-items: center;
+  margin-bottom: 2.4rem;
 `;
 
 export const SubmitButton = styled.button`

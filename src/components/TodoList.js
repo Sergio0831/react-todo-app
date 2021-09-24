@@ -10,7 +10,7 @@ import {
 } from "./styles/StyledTodoList";
 import CrossIcon from "./CrossIcon";
 
-const TodoList = ({ todos, setTodos, showTodo }) => {
+const TodoList = ({ todos, setTodos, filtered }) => {
   const handleDeleteClick = (id) => {
     const newTodos = todos.filter((todo) => todo.id !== id);
     setTodos(newTodos);
@@ -28,10 +28,10 @@ const TodoList = ({ todos, setTodos, showTodo }) => {
 
   return (
     <StyledTodoList>
-      {todos.map((todo) => {
+      {filtered.map((todo) => {
         const { id, value, isCompleted } = todo;
         return (
-          <Todo key={id} showTodo={showTodo}>
+          <Todo key={id}>
             <Label htmlFor={id}>
               <Checkbox
                 type='checkbox'
@@ -40,7 +40,7 @@ const TodoList = ({ todos, setTodos, showTodo }) => {
                 defaultChecked={isCompleted}
                 onChange={() => toggleTodoCompleted(id)}
               />
-              <CustomCheckbox class='custom-checkbox'></CustomCheckbox>
+              <CustomCheckbox className='custom-checkbox'></CustomCheckbox>
               <TodoText isCompleted={isCompleted}>{value}</TodoText>
             </Label>
             <DeleteButton

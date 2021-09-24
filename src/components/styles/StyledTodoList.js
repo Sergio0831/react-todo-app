@@ -25,10 +25,16 @@ export const Todo = styled.li`
   padding: 1.6rem 2.4rem;
   align-items: center;
   justify-content: space-between;
+  transition: all 0.5s ease;
   cursor: pointer;
   background: ${(props) => props.theme.todoActionBg};
   animation: ${moveInRight} 0.5s both;
   border-bottom: 1px solid ${(props) => props.theme.todoBorderBottom};
+
+  &:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
 
   &:hover ${DeleteButton} {
     opacity: 1;
@@ -124,8 +130,6 @@ export const CustomCheckbox = styled.span`
 `;
 
 export const Checkbox = styled.input`
-  width: 1px;
-  height: 1px;
   overflow: hidden;
   clip: rect(0 0 0 0);
   cursor: pointer;
@@ -145,10 +149,10 @@ export const Checkbox = styled.input`
       opacity: 1;
     }
   }
-`;
 
-// border-color: linear-gradient(
-//       130deg,
-//       hsl(192, 100%, 67%),
-//       hsl(280, 87%, 65%)
-//     );
+  &:not(:checked):focus + ${CustomCheckbox} {
+    ::after {
+      opacity: 1;
+    }
+  }
+`;

@@ -6,6 +6,9 @@ export const StyledTodoActionFooter = styled.div`
   align-items: center;
   padding: 1.6rem 2.4rem;
   background: ${(props) => props.theme.todoActionBg};
+  transition: all 0.5s ease;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 `;
 
 export const ItemsLeft = styled.p`
@@ -33,11 +36,15 @@ export const FilterButton = styled.button`
   font-size: 1.4rem;
   line-height: 1;
   letter-spacing: -0.2px;
-  color: ${(props) => props.theme.footerColor};
+  color: ${(props) => (props.active ? " #3a7cfd" : props.theme.footerColor)};
   cursor: pointer;
   transition: all 0.5s ease;
 
   &.${(props) => props.active} {
+    color: #3a7cfd;
+  }
+
+  &:active {
     color: #3a7cfd;
   }
 

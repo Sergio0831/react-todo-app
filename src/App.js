@@ -29,6 +29,7 @@ const App = () => {
   const [sound, setSound] = useState(new Audio(audioOff));
   const [playOn] = useSound(audioOn, { volume: 0.25 });
   const [playOff] = useSound(audioOff, { volume: 0.25 });
+  const [filtered, setFiltered] = useState([]);
 
   const playSound = () => {
     nightMode ? playOn() : playOff();
@@ -94,8 +95,13 @@ const App = () => {
             todos={todos}
           />
           <TodoAction>
-            <TodoList todos={todos} setTodos={setTodos} />
-            <TodoActionFooter todos={todos} />
+            <TodoList todos={todos} setTodos={setTodos} filtered={filtered} />
+            <TodoActionFooter
+              todos={todos}
+              setTodos={setTodos}
+              filtered={filtered}
+              setFiltered={setFiltered}
+            />
           </TodoAction>
           <FooterText>Drag and drop to reorder list</FooterText>
         </TodoContainer>
