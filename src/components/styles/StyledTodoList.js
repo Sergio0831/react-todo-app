@@ -4,6 +4,7 @@ import iconCheck from "../../images/icon-check.svg";
 
 export const StyledTodoList = styled(motion.ul)`
   transition: all 0.5s ease;
+  position: relative;
 `;
 
 export const DeleteButton = styled.button`

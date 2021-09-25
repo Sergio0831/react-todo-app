@@ -9,7 +9,13 @@ import {
   Todo
 } from "./styles/StyledTodoList";
 import CrossIcon from "./CrossIcon";
-import { AnimatePresence, motion, usePresence } from "framer-motion";
+import {
+  AnimatePresence,
+  AnimateSharedLayout,
+  motion,
+  usePresence
+} from "framer-motion";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 const TodoList = ({ todos, setTodos, filtered }) => {
   const handleDeleteTodo = (id) => {
@@ -27,7 +33,7 @@ const TodoList = ({ todos, setTodos, filtered }) => {
     setTodos(updatedTodo);
   };
 
-  const transition = { type: "spring", stiffness: 500, damping: 50, mass: 1 };
+  const transition = { type: "spring", stiffnes: 300 };
 
   const [isPresent, safeToRemove] = usePresence();
 
@@ -39,47 +45,49 @@ const TodoList = ({ todos, setTodos, filtered }) => {
       position: isPresent ? "static" : "absolute"
     },
     animate: isPresent ? "in" : "out",
-    whileTap: "tapped",
+    whileHover: { scale: 1.03 },
+    whileTap: { scale: 1.12 },
     variants: {
       in: { scaleY: 1, opacity: 1 },
-      out: { scaleY: 0.5, opacity: 0, zIndex: -1 },
-      tapped: { scale: 0.7, opacity: 0.5, transition: { duration: 0.05 } }
+      out: { scaleY: 0.3, opacity: 0, zIndex: -1 }
     },
     onAnimationComplete: () => !isPresent && safeToRemove(),
     transition
   };
 
   return (
-    <AnimatePresence>
-      <StyledTodoList>
-        {filtered.map((todo) => {
-          const { id, value, isCompleted } = todo;
-          return (
-            <Todo as={motion.li} key={id} {...animations}>
-              <Label htmlFor={id}>
-                <Checkbox
-                  type='checkbox'
-                  id={id}
-                  name='complete'
-                  defaultChecked={isCompleted}
-                  onChange={() => handleCompletedTodo(id)}
-                />
-                <CustomCheckbox className='custom-checkbox'></CustomCheckbox>
-                <TodoText isCompleted={isCompleted}>{value}</TodoText>
-              </Label>
-              <DeleteButton
-                type='button'
-                aria-label='alternative for screen readers'
-                title='alternative for other users'
-                onClick={() => handleDeleteTodo(id)}
-              >
-                <CrossIcon />
-              </DeleteButton>
-            </Todo>
-          );
-        })}
+    <AnimateSharedLayout>
+      <StyledTodoList as={motion.ul}>
+        <AnimatePresence>
+          {filtered.map((todo) => {
+            const { id, value, isCompleted } = todo;
+            return (
+              <Todo as={motion.li} key={id} {...animations}>
+                <Label htmlFor={id}>
+                  <Checkbox
+                    type='checkbox'
+                    id={id}
+                    name='complete'
+                    defaultChecked={isCompleted}
+                    onChange={() => handleCompletedTodo(id)}
+                  />
+                  <CustomCheckbox className='custom-checkbox'></CustomCheckbox>
+                  <TodoText isCompleted={isCompleted}>{value}</TodoText>
+                </Label>
+                <DeleteButton
+                  type='button'
+                  aria-label='alternative for screen readers'
+                  title='alternative for other users'
+                  onClick={() => handleDeleteTodo(id)}
+                >
+                  <CrossIcon />
+                </DeleteButton>
+              </Todo>
+            );
+          })}
+        </AnimatePresence>
       </StyledTodoList>
-    </AnimatePresence>
+    </AnimateSharedLayout>
   );
 };
 
