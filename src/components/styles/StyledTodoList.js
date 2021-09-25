@@ -1,8 +1,8 @@
+import { motion } from "framer-motion";
 import styled from "styled-components/macro";
 import iconCheck from "../../images/icon-check.svg";
-import { moveInRight, moveOutRight } from "./animation";
 
-export const StyledTodoList = styled.ul`
+export const StyledTodoList = styled(motion.ul)`
   transition: all 0.5s ease;
 `;
 
@@ -20,7 +20,7 @@ export const DeleteButton = styled.button`
   }
 `;
 
-export const Todo = styled.li`
+export const Todo = styled(motion.li)`
   display: flex;
   padding: 1.6rem 2.4rem;
   align-items: center;
@@ -28,7 +28,6 @@ export const Todo = styled.li`
   transition: all 0.5s ease;
   cursor: pointer;
   background: ${(props) => props.theme.todoActionBg};
-  animation: ${moveInRight} 0.5s both;
   border-bottom: 1px solid ${(props) => props.theme.todoBorderBottom};
 
   &:first-child {

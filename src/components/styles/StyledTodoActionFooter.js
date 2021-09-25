@@ -36,15 +36,11 @@ export const FilterButton = styled.button`
   font-size: 1.4rem;
   line-height: 1;
   letter-spacing: -0.2px;
-  color: ${(props) => (props.active ? " #3a7cfd" : props.theme.footerColor)};
+  color: ${(props) => props.theme.footerColor};
   cursor: pointer;
   transition: all 0.5s ease;
 
-  &.${(props) => props.active} {
-    color: #3a7cfd;
-  }
-
-  &:active {
+  &.active {
     color: #3a7cfd;
   }
 

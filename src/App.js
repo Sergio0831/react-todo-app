@@ -26,13 +26,13 @@ const App = () => {
     () => localStorage.getItem("night_mode") === "true"
   );
 
-  const [sound, setSound] = useState(new Audio(audioOff));
-  const [playOn] = useSound(audioOn, { volume: 0.25 });
-  const [playOff] = useSound(audioOff, { volume: 0.25 });
+  const [sound, setSound] = useState(new Audio());
+  const [playOn] = useSound(audioOn, { volume: 0.5 });
+  const [playOff] = useSound(audioOff, { volume: 0.5 });
   const [filtered, setFiltered] = useState([]);
 
   const playSound = () => {
-    nightMode ? playOn() : playOff();
+    nightMode ? setSound(playOn()) : setSound(playOff());
   };
 
   const [todos, setTodos] = useState(() => {

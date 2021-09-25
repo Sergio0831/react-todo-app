@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   CompletedButton,
   FilterButton,
@@ -26,7 +26,7 @@ const TodoActionFooter = ({ todos, setFiltered, setTodos }) => {
     setTodos(newTodos);
   };
 
-  const handleFilterTodos = () => {
+  const handleFilterTodos = useCallback(() => {
     switch (status) {
       case "Completed":
         setFiltered(todos.filter((todo) => todo.isCompleted === true));
@@ -38,11 +38,11 @@ const TodoActionFooter = ({ todos, setFiltered, setTodos }) => {
         setFiltered(todos);
         break;
     }
-  };
+  }, [todos, status, setFiltered]);
 
   useEffect(() => {
     handleFilterTodos();
-  }, [todos, status]);
+  }, [todos, status, handleFilterTodos]);
 
   return (
     <StyledTodoActionFooter>
@@ -51,7 +51,11 @@ const TodoActionFooter = ({ todos, setFiltered, setTodos }) => {
       <FilterList>
         {buttons.map((button) => (
           <FilterItem key={button}>
-            <FilterButton active value={button} onClick={handleStatus}>
+            <FilterButton
+              className={status === button ? "active" : ""}
+              value={button}
+              onClick={handleStatus}
+            >
               {button}
             </FilterButton>
           </FilterItem>
