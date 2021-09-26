@@ -1,6 +1,6 @@
 import styled from "styled-components/macro";
 import iconCheck from "../../images/icon-check.svg";
-import { moveInRight, moveOutRight } from "../styles/animation";
+import { moveInRight } from "../styles/animation";
 
 export const DeleteButton = styled.button`
   background-color: transparent;
@@ -18,15 +18,14 @@ export const DeleteButton = styled.button`
 
 export const StyledTodo = styled.li`
   display: flex;
-  padding: 1.6rem 2.4rem;
+  padding: 1.6rem 2rem;
   align-items: center;
   justify-content: space-between;
-  transition: all 0.5s ease;
+  transition: background-color 0.5s ease, border-color 0.5s ease;
   cursor: pointer;
-  background: ${(props) => props.theme.todoActionBg};
+  background-color: ${(props) => props.theme.todoActionBg};
   border-bottom: 1px solid ${(props) => props.theme.todoBorderBottom};
-  animation: ${(props) => (props.fade ? moveOutRight : moveInRight)} 0.5s
-    forwards;
+  animation: ${moveInRight} 0.5s forwards;
 
   &:first-child {
     border-top-left-radius: 5px;
@@ -37,12 +36,20 @@ export const StyledTodo = styled.li`
     opacity: 1;
     visibility: visible;
   }
+
+  @media only screen and (min-width: 34.375em) {
+    padding: 1.6rem 2.4rem;
+  }
 `;
 
 export const Label = styled.label`
   width: 100%;
-  padding-left: 4.8rem;
+  padding-left: 3.6rem;
   cursor: pointer;
+
+  @media only screen and (min-width: 34.375em) {
+    padding-left: 4.8rem;
+  }
 `;
 
 export const TodoText = styled.span`
@@ -52,7 +59,7 @@ export const TodoText = styled.span`
   user-select: none;
   line-height: 1.5;
   letter-spacing: -0.25px;
-  transition: all 0.5s ease;
+  transition: color 0.5s ease;
   position: relative;
 
   &::before {
@@ -72,14 +79,20 @@ export const TodoText = styled.span`
 
 export const CustomCheckbox = styled.span`
   position: absolute;
-  width: 2.4rem;
-  height: 2.4rem;
-  margin-left: -4.8rem;
+  width: 2rem;
+  height: 2rem;
+  margin-left: -3.6rem;
   border: 1px solid ${(props) => props.theme.todoBorderBottom};
   border-radius: 50%;
   background: transparent;
   cursor: pointer;
-  transition: all 0.5s ease;
+  transition: opacity 0.5s ease;
+
+  @media only screen and (min-width: 34.375em) {
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-left: -4.8rem;
+  }
 
   &::before {
     content: "";
@@ -93,7 +106,7 @@ export const CustomCheckbox = styled.span`
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 50%;
-    transition: all 0.5s ease;
+    transition: opacity 0.5s ease;
     opacity: 0;
     border: 1px solid transparent;
     background-origin: border-box;
@@ -122,20 +135,16 @@ export const CustomCheckbox = styled.span`
     -webkit-mask-composite: destination-out;
     mask-composite: destination-out;
     opacity: 0;
-    transition: all 0.5s ease;
+    transition: opacity 0.5s ease;
   }
 `;
 
 export const Checkbox = styled.input`
-  width: 0;
-  height: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
   overflow: hidden;
   clip: rect(0 0 0 0);
-  cursor: pointer;
-  transition: all 0.5s ease;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
 
   &:checked + ${CustomCheckbox} {
     ::before {

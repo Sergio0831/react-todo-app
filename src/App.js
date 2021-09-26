@@ -6,7 +6,6 @@ import IconMoon from "./components/IconMoon";
 import IconSun from "./components/IconSun";
 import { StyledAlert, Text } from "./components/styles/StyledAlert";
 import {
-  FooterText,
   Switcher,
   Title,
   TodoContainer,
@@ -27,7 +26,6 @@ const App = () => {
     () => localStorage.getItem("night_mode") === "true"
   );
   const [alert, setAlert] = useState(false);
-
   const [sound, setSound] = useState(new Audio());
   const [playOn] = useSound(audioOn, { volume: 0.5 });
   const [playOff] = useSound(audioOff, { volume: 0.5 });
@@ -81,7 +79,6 @@ const App = () => {
               <TodoList />
               <TodoActionFooter />
             </TodoAction>
-            <FooterText>Drag and drop to reorder list</FooterText>
           </TodoContainer>
         </Container>
       </ThemeProvider>

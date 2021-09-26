@@ -16,5 +16,4 @@ const TodoList = () => {
     </StyledTodoList>
   );
 };
-
 export default TodoList;

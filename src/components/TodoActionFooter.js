@@ -5,8 +5,8 @@ import {
   FilterButton,
   FilterItem,
   FilterList,
-  ItemsLeft,
-  StyledTodoActionFooter
+  TopFooter,
+  ItemsLeft
 } from "./styles/StyledTodoActionFooter";
 
 const TodoActionFooter = () => {
@@ -16,9 +16,13 @@ const TodoActionFooter = () => {
   const { status, onStatus, onClearCompleted, itemsLeft } = app;
 
   return (
-    <StyledTodoActionFooter>
-      <ItemsLeft>{itemsLeft} items left</ItemsLeft>
-
+    <>
+      <TopFooter>
+        <ItemsLeft>{itemsLeft} items left</ItemsLeft>
+        <CompletedButton onClick={() => onClearCompleted()}>
+          Clear Completed
+        </CompletedButton>
+      </TopFooter>
       <FilterList>
         {buttons.map((button) => (
           <FilterItem key={button}>
@@ -32,10 +36,7 @@ const TodoActionFooter = () => {
           </FilterItem>
         ))}
       </FilterList>
-      <CompletedButton onClick={() => onClearCompleted()}>
-        Clear Completed
-      </CompletedButton>
-    </StyledTodoActionFooter>
+    </>
   );
 };
 
