@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyledAlert, Text } from "./styles/StyledAlert";
 
-export default function Alert() {
-  const [alert, setAlert] = useState(false);
-
+const Alert = ({ alert }) => {
   return (
     <StyledAlert alert={alert} setAlert={setAlert}>
       <Text>Add Todo</Text>
     </StyledAlert>
   );
-}
+};
+
+export default Alert;

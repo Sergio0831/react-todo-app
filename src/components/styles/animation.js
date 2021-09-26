@@ -43,6 +43,11 @@ export const fadeOutTop = keyframes`
 		opacity: 1;
 	}
 
+	50% {
+		transform: translateX(-50%) translateY(-150%) scale(0.3);
+		opacity: 0;
+	}
+
 	100% {
 		transform: translateX(-50%) translateY(-150%) scale(0.3);
 		opacity: 0;

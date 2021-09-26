@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { v4 } from "uuid";
 import {
   StyledTodoForm,
@@ -6,10 +6,13 @@ import {
   Label,
   Input
 } from "../components/styles/StyledTodoForm";
+import { TodoContext } from "../context/TodoContext";
 
-const TodoForm = ({ setTodos, todos, setAlert }) => {
+const TodoForm = ({ setAlert }) => {
   const [value, setValue] = useState("");
   const [isCompleted, setIsCompleted] = useState(false);
+  const app = useContext(TodoContext);
+  const { todos, setTodos } = app;
 
   const handleFormSubmit = (e) => {
     e.preventDefault();

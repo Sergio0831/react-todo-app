@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useContext } from "react";
+import { TodoContext } from "../context/TodoContext";
 import {
   CompletedButton,
   FilterButton,
@@ -8,41 +9,11 @@ import {
   StyledTodoActionFooter
 } from "./styles/StyledTodoActionFooter";
 
-const TodoActionFooter = ({ todos, setFiltered, setTodos }) => {
+const TodoActionFooter = () => {
   const buttons = ["All", "Active", "Completed"];
-  const [status, setStatus] = useState("All");
 
-  const handleStatus = (e) => {
-    setStatus(e.target.value);
-  };
-
-  const itemsLeft = todos.reduce((total, todo) => {
-    total += todo.isCompleted === false;
-    return total;
-  }, 0);
-
-  const handleClearCompleted = () => {
-    const newTodos = todos.filter((todo) => !todo.isCompleted);
-    setTodos(newTodos);
-  };
-
-  const handleFilterTodos = useCallback(() => {
-    switch (status) {
-      case "Completed":
-        setFiltered(todos.filter((todo) => todo.isCompleted === true));
-        break;
-      case "Active":
-        setFiltered(todos.filter((todo) => todo.isCompleted === false));
-        break;
-      default:
-        setFiltered(todos);
-        break;
-    }
-  }, [todos, status, setFiltered]);
-
-  useEffect(() => {
-    handleFilterTodos();
-  }, [todos, status, handleFilterTodos]);
+  const app = useContext(TodoContext);
+  const { status, onStatus, onClearCompleted, itemsLeft } = app;
 
   return (
     <StyledTodoActionFooter>
@@ -54,14 +25,14 @@ const TodoActionFooter = ({ todos, setFiltered, setTodos }) => {
             <FilterButton
               className={status === button ? "active" : ""}
               value={button}
-              onClick={handleStatus}
+              onClick={onStatus}
             >
               {button}
             </FilterButton>
           </FilterItem>
         ))}
       </FilterList>
-      <CompletedButton onClick={() => handleClearCompleted()}>
+      <CompletedButton onClick={() => onClearCompleted()}>
         Clear Completed
       </CompletedButton>
     </StyledTodoActionFooter>
