@@ -19,12 +19,12 @@ const TodoForm = ({ setAlert }) => {
 			setAlert(true);
 		} else {
 			setTodos([
-				...todos,
 				{
 					id: v4(),
 					value: value,
 					isCompleted: false,
 				},
+				...todos,
 			]);
 			setValue('');
 		}
@@ -32,18 +32,19 @@ const TodoForm = ({ setAlert }) => {
 
 	return (
 		<StyledTodoForm autoComplete='off' onSubmit={handleFormSubmit}>
+			<SubmitButton type='submit' aria-label='Add Todo'></SubmitButton>
 			<Label htmlFor='add'>
-				<SubmitButton type='submit' aria-label='Add Todo' />
+				<Input
+					id='add'
+					type='text'
+					placeholder='Create a new todo…'
+					value={value}
+					onChange={(e) => setValue(e.target.value)}
+					autoFocus
+					autoComplete='off'
+					maxLength='40'
+				/>
 			</Label>
-			<Input
-				id='add'
-				type='text'
-				placeholder='Create a new todo…'
-				value={value}
-				onChange={(e) => setValue(e.target.value)}
-				autoFocus
-				autoComplete='off'
-			/>
 		</StyledTodoForm>
 	);
 };

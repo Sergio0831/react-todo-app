@@ -2,16 +2,15 @@ import styled from 'styled-components/macro';
 
 export const TodoContainer = styled.div`
 	max-width: 90vw;
-	top: 6rem;
 	width: 100%;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
+	justify-self: center;
+	grid-row: 1 / -1;
+	grid-column: 1/ -1;
+	margin-top: 4.8rem;
 
 	@media only screen and (min-width: 34.375em) {
 		max-width: 54rem;
-		transform: translateX(-50%);
-		top: 7rem;
+		margin-top: 7rem;
 	}
 `;
 

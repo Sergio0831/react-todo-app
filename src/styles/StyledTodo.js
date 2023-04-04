@@ -1,13 +1,15 @@
 import styled from 'styled-components/macro';
 import iconCheck from '../images/icon-check.svg';
+import { motion } from 'framer-motion';
 
 export const DeleteButton = styled.button`
 	background-color: transparent;
 	border: none;
+	justify-self: end;
 	cursor: pointer;
 	opacity: 0;
 	visibility: hidden;
-	transition: all 0.5s ease;
+	transition: opacity var(--transition), visibility var(--transition);
 
 	@media only screen and (max-width: 34.375em), only screen and (hover: none) {
 		opacity: 1;
@@ -15,13 +17,13 @@ export const DeleteButton = styled.button`
 	}
 `;
 
-export const StyledTodo = styled.li`
-	display: flex;
+export const StyledTodo = styled(motion.li)`
+	display: grid;
+	grid-template-columns: min-content max-content 1fr;
 	padding: 1.6rem 2rem;
 	align-items: center;
-	justify-content: space-between;
-	transition: background-color 0.5s ease, border-color 0.5s ease;
-	cursor: pointer;
+	transition: background-color var(--transition), border-color var(--transition);
+	cursor: grab;
 	background-color: ${(props) => props.theme.todoActionBg};
 	border-bottom: 1px solid ${(props) => props.theme.todoBorderBottom};
 
@@ -36,29 +38,25 @@ export const StyledTodo = styled.li`
 	}
 
 	@media only screen and (min-width: 34.375em) {
-		padding: 1.6rem 2.4rem;
+		padding: 2rem 2.4rem;
+		grid-template-columns: min-content max-content 1fr;
 	}
 `;
 
 export const Label = styled.label`
-	width: 100%;
-	padding-left: 3.6rem;
 	cursor: pointer;
-
-	@media only screen and (min-width: 34.375em) {
-		padding-left: 4.8rem;
-	}
 `;
 
-export const TodoText = styled.span`
+export const TodoText = styled.p`
 	color: ${(props) =>
 		props.isCompleted ? props.theme.completedTodoColor : props.theme.todoColor};
 	cursor: pointer;
 	user-select: none;
 	line-height: 1.5;
 	letter-spacing: -0.25px;
-	transition: color 0.5s ease;
+	transition: color var(--transition);
 	position: relative;
+	margin-left: 1.2rem;
 
 	&::before {
 		content: '';
@@ -67,36 +65,39 @@ export const TodoText = styled.span`
 		width: ${(props) => (props.isCompleted ? '100%' : '0')};
 		height: 1px;
 		top: calc(50% - 1px);
-		transition: background-color 0.5s ease, width 0.5s ease;
+		transition: background-color var(--transition), width var(--transition);
 		background-color: ${(props) =>
 			props.isCompleted
 				? props.theme.completedTodoColor
 				: props.theme.todoColor};
 	}
+
+	@media only screen and (min-width: 34.375em) {
+		margin-left: 2.4rem;
+	}
 `;
 
-export const CustomCheckbox = styled.span`
-	position: absolute;
+export const CustomCheckbox = styled.div`
+	position: relative;
+	box-sizing: border-box;
 	width: 2rem;
 	height: 2rem;
-	margin-left: -3.6rem;
 	border: 1px solid ${(props) => props.theme.todoBorderBottom};
 	border-radius: 50%;
 	background: transparent;
 	cursor: pointer;
-	transition: opacity 0.5s ease, border-color 0.5s ease;
+	transition: opacity var(--transition), border-color var(--transition);
 
 	@media only screen and (min-width: 34.375em) {
 		width: 2.4rem;
 		height: 2.4rem;
-		margin-left: -4.8rem;
 	}
 
 	&::before {
 		content: '';
 		position: absolute;
-		top: -3%;
-		left: -3%;
+		top: 0;
+		left: 0;
 		width: 100%;
 		height: 100%;
 		background-image: url(${iconCheck}),
@@ -104,7 +105,7 @@ export const CustomCheckbox = styled.span`
 		background-repeat: no-repeat;
 		background-position: center;
 		border-radius: 50%;
-		transition: opacity 0.5s ease;
+		transition: opacity var(--transition), background-image var(--transition);
 		opacity: 0;
 		border: 1px solid transparent;
 		background-origin: border-box;
@@ -113,8 +114,8 @@ export const CustomCheckbox = styled.span`
 	&::after {
 		content: '';
 		position: absolute;
-		top: -3%;
-		left: -3%;
+		top: 0;
+		left: 0;
 		width: 100%;
 		height: 100%;
 		border: 1px solid transparent;
@@ -133,7 +134,7 @@ export const CustomCheckbox = styled.span`
 		-webkit-mask-composite: destination-out;
 		mask-composite: destination-out;
 		opacity: 0;
-		transition: opacity 0.5s ease;
+		transition: opacity var(--transition);
 	}
 `;
 
@@ -145,6 +146,8 @@ export const Checkbox = styled.input`
 	clip: rect(0 0 0 0);
 
 	&:checked + ${CustomCheckbox} {
+		border: transparent;
+
 		::before {
 			opacity: 1;
 		}

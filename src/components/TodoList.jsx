@@ -2,18 +2,19 @@ import React, { useContext } from 'react';
 import Todo from './Todo';
 import { StyledTodoList } from '../styles/StyledTodoList';
 import { TodoContext } from '../context/TodoContext';
+import { AnimatePresence } from 'framer-motion';
 
 const TodoList = () => {
-	const app = useContext(TodoContext);
-	const { filtered } = app;
+	const { filtered } = useContext(TodoContext);
 
 	return (
-		<StyledTodoList>
-			{filtered.map((todo) => {
-				const { id } = todo;
-				return <Todo key={id} {...todo} />;
-			})}
-		</StyledTodoList>
+		<AnimatePresence initial={false} mode='popLayout'>
+			<StyledTodoList>
+				{filtered.map((todo, index) => (
+					<Todo key={todo.id} todo={todo} index={index} />
+				))}
+			</StyledTodoList>
+		</AnimatePresence>
 	);
 };
 export default TodoList;

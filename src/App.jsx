@@ -54,7 +54,7 @@ const App = () => {
 			<ThemeProvider theme={nightMode ? themeDark : themeLight}>
 				<Container>
 					<StyledAlert alert={alert}>
-						<Text>Add Todo</Text>
+						<Text nightMode={nightMode}>Add Todo</Text>
 					</StyledAlert>
 					<Header />
 					<TodoContainer>

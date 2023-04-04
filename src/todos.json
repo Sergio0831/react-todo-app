@@ -1,0 +1,32 @@
+[
+	{
+		"id": "1",
+		"value": "Fix the broken links on the homepage",
+		"isCompleted": false
+	},
+	{
+		"id": "2",
+		"value": "Optimize the website for mobile devices",
+		"isCompleted": false
+	},
+	{
+		"id": "3",
+		"value": "Implement a search feature on the site",
+		"isCompleted": true
+	},
+	{
+		"id": "4",
+		"value": "Create a new landing page for the latest product",
+		"isCompleted": false
+	},
+	{
+		"id": "5",
+		"value": "Improve the site's loading speed",
+		"isCompleted": true
+	},
+	{
+		"id": "6",
+		"value": "Fix the formatting issues on the blog posts",
+		"isCompleted": false
+	}
+]

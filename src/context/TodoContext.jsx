@@ -1,12 +1,13 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
+import data from '../todos.json';
 
 export const TodoContext = createContext();
 
 export const TodoProvider = ({ children }) => {
 	const [filtered, setFiltered] = useState([]);
 	const [status, setStatus] = useState('All');
-	const [todos, setTodos] = useLocalStorage('todos', []);
+	const [todos, setTodos] = useLocalStorage('todos', data);
 
 	const handleDeleteTodo = (id) => {
 		const newTodos = todos.filter((todo) => todo.id !== id);
