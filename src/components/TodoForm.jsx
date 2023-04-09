@@ -5,6 +5,7 @@ import {
 	SubmitButton,
 	Label,
 	Input,
+	ButtonContainer,
 } from '../styles/StyledTodoForm';
 import { TodoContext } from '../context/TodoContext';
 
@@ -32,7 +33,9 @@ const TodoForm = ({ setAlert }) => {
 
 	return (
 		<StyledTodoForm autoComplete='off' onSubmit={handleFormSubmit}>
-			<SubmitButton type='submit' aria-label='Add Todo'></SubmitButton>
+			<ButtonContainer>
+				<SubmitButton type='submit' aria-label='Add Todo'></SubmitButton>
+			</ButtonContainer>
 			<Label htmlFor='add'>
 				<Input
 					id='add'
@@ -42,7 +45,7 @@ const TodoForm = ({ setAlert }) => {
 					onChange={(e) => setValue(e.target.value)}
 					autoFocus
 					autoComplete='off'
-					maxLength='40'
+					maxLength='50'
 				/>
 			</Label>
 		</StyledTodoForm>

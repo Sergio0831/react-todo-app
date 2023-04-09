@@ -25,6 +25,7 @@ import {
 	TodoContainer,
 	TodoHeader,
 } from './styles/StyledTodoContainer';
+import { LayoutGroup } from 'framer-motion';
 
 const App = () => {
 	const [nightMode, setNightMode] = useLocalStorage('night_mode', false);
@@ -54,7 +55,7 @@ const App = () => {
 			<ThemeProvider theme={nightMode ? themeDark : themeLight}>
 				<Container>
 					<StyledAlert alert={alert}>
-						<Text nightMode={nightMode}>Add Todo</Text>
+						<Text nightMode={nightMode}>Create Todo</Text>
 					</StyledAlert>
 					<Header />
 					<TodoContainer>
@@ -75,11 +76,14 @@ const App = () => {
 							</Switcher>
 						</TodoHeader>
 						<TodoForm autocomplete='off' setAlert={setAlert} />
-						<TodoAction>
-							<TodoList />
-							<TodoActionFooter />
-						</TodoAction>
+						<LayoutGroup>
+							<TodoAction>
+								<TodoList />
+								<TodoActionFooter />
+							</TodoAction>
+						</LayoutGroup>
 					</TodoContainer>
+
 					<Footer text='Drag and drop to reorder list' />
 				</Container>
 			</ThemeProvider>

@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 export const DeleteButton = styled.button`
 	background-color: transparent;
 	border: none;
-	justify-self: end;
 	cursor: pointer;
 	opacity: 0;
 	visibility: hidden;
@@ -18,12 +17,10 @@ export const DeleteButton = styled.button`
 `;
 
 export const StyledTodo = styled(motion.li)`
-	display: grid;
-	grid-template-columns: min-content max-content 1fr;
+	display: flex;
 	padding: 1.6rem 2rem;
 	align-items: center;
 	transition: background-color var(--transition), border-color var(--transition);
-	cursor: grab;
 	background-color: ${(props) => props.theme.todoActionBg};
 	border-bottom: 1px solid ${(props) => props.theme.todoBorderBottom};
 
@@ -39,7 +36,7 @@ export const StyledTodo = styled(motion.li)`
 
 	@media only screen and (min-width: 34.375em) {
 		padding: 2rem 2.4rem;
-		grid-template-columns: min-content max-content 1fr;
+		grid-template-columns: min-content 1fr min-content;
 	}
 `;
 
@@ -47,33 +44,29 @@ export const Label = styled.label`
 	cursor: pointer;
 `;
 
-export const TodoText = styled.p`
-	color: ${(props) =>
-		props.isCompleted ? props.theme.completedTodoColor : props.theme.todoColor};
-	cursor: pointer;
-	user-select: none;
-	line-height: 1.5;
-	letter-spacing: -0.25px;
-	transition: color var(--transition);
-	position: relative;
-	margin-left: 1.2rem;
+export const TodoText = styled.div`
+	cursor: grab;
+	padding-left: 2rem;
+	padding-right: 2rem;
+	flex: fit-content;
 
-	&::before {
-		content: '';
-		left: ${(props) => (props.isCompleted ? '0' : '')};
-		position: absolute;
-		width: ${(props) => (props.isCompleted ? '100%' : '0')};
-		height: 1px;
-		top: calc(50% - 1px);
-		transition: background-color var(--transition), width var(--transition);
-		background-color: ${(props) =>
+	p {
+		color: ${(props) =>
 			props.isCompleted
 				? props.theme.completedTodoColor
 				: props.theme.todoColor};
+		user-select: none;
+		line-height: 1.5;
+		letter-spacing: -0.25px;
+		transition: color var(--transition);
+		word-break: break-all;
+		text-decoration: ${(props) =>
+			props.isCompleted ? 'line-through' : 'none'};
 	}
 
 	@media only screen and (min-width: 34.375em) {
-		margin-left: 2.4rem;
+		padding-left: 2.4rem;
+		padding-right: 2.4rem;
 	}
 `;
 
@@ -152,16 +145,4 @@ export const Checkbox = styled.input`
 			opacity: 1;
 		}
 	}
-
-	/* &:not(:checked):hover + ${CustomCheckbox} {
-    ::after {
-      opacity: 1;
-    }
-  }
-
-  &:not(:checked):focus + ${CustomCheckbox} {
-    ::after {
-      opacity: 1;
-    }
-  } */
 `;

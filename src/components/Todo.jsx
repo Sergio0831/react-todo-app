@@ -9,13 +9,16 @@ import {
 } from '../styles/StyledTodo';
 import CrossIcon from './CrossIcon';
 import { TodoContext } from '../context/TodoContext';
+import { Reorder, useDragControls } from 'framer-motion';
 
 const Todo = ({ todo, index }) => {
 	const { onCompletedTodo, onDeleteTodo } = useContext(TodoContext);
 	const { id, value, isCompleted } = todo;
+	const controls = useDragControls();
 
 	return (
-		<StyledTodo
+		<Reorder.Item
+			as={StyledTodo}
 			initial={{ opacity: 0, scale: 0.8 }}
 			animate={{ opacity: 1, scale: 1 }}
 			exit={{ opacity: 0, scale: 0.8 }}
@@ -27,6 +30,9 @@ const Todo = ({ todo, index }) => {
 				},
 			}}
 			layout
+			value={todo}
+			dragListener={false}
+			dragControls={controls}
 		>
 			<Label htmlFor={id}>
 				<Checkbox
@@ -38,7 +44,13 @@ const Todo = ({ todo, index }) => {
 				/>
 				<CustomCheckbox className='custom-checkbox'></CustomCheckbox>
 			</Label>
-			<TodoText isCompleted={isCompleted}>{value}</TodoText>
+			<TodoText
+				isCompleted={isCompleted}
+				onPointerDown={(e) => controls.start(e)}
+				dragControls={controls}
+			>
+				<p>{value}</p>
+			</TodoText>
 			<DeleteButton
 				type='button'
 				aria-label='alternative for screen readers'
@@ -47,7 +59,7 @@ const Todo = ({ todo, index }) => {
 			>
 				<CrossIcon />
 			</DeleteButton>
-		</StyledTodo>
+		</Reorder.Item>
 	);
 };
 

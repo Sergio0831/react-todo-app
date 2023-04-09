@@ -20,9 +20,9 @@ export const StyledTodoForm = styled.form`
 `;
 
 export const SubmitButton = styled.button`
+	grid-area: 1 / 1 / -1 / -1;
 	height: 2rem;
 	width: 2rem;
-	left: 2rem;
 	z-index: 10;
 	background-color: ${(props) => props.theme.todoBgColor};
 	box-sizing: border-box;
@@ -31,18 +31,41 @@ export const SubmitButton = styled.button`
 	cursor: pointer;
 	transition: border-color var(--transition), background-color var(--transition);
 
-	&:focus {
-		outline: none;
-	}
-
-	&:focus-visible {
-		box-shadow: 0 0 0 2px hsl(192, 100%, 67%), 0 0 0 4px hsl(280, 87%, 65%);
-	}
-
 	@media only screen and (min-width: 34.375em) {
 		height: 2.4rem;
 		width: 2.4rem;
-		left: 2.4rem;
+	}
+`;
+
+export const ButtonContainer = styled.div`
+	display: grid;
+	place-items: center;
+
+	&::before {
+		content: '';
+		grid-area: 1 / 1 / -1 / -1;
+		height: 2rem;
+		width: 2rem;
+		z-index: 5;
+		transform: scale(0.9);
+		border-radius: var(--round);
+		background-image: var(--gradient);
+		transition: transform var(--transition);
+
+		@media only screen and (min-width: 34.375em) {
+			height: 2.4rem;
+			width: 2.4rem;
+		}
+	}
+
+	&:hover {
+		&::before {
+			transform: scale(1.1);
+		}
+
+		${SubmitButton} {
+			border-color: transparent;
+		}
 	}
 `;
 
