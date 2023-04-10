@@ -5,7 +5,7 @@ import {
 	FilterButton,
 	FilterItem,
 	FilterList,
-	TopFooter,
+	Footer,
 	ItemsLeft,
 } from '../styles/StyledTodoActionFooter';
 
@@ -16,18 +16,12 @@ const TodoActionFooter = () => {
 		useContext(TodoContext);
 
 	return (
-		<>
-			<TopFooter>
-				<ItemsLeft>
+		<Footer>
+			<ItemsLeft>
+				<p>
 					{itemsLeft} {itemsLeft === 1 ? 'item' : 'items'} left
-				</ItemsLeft>
-				<CompletedButton
-					onClick={() => onClearCompleted()}
-					aria-label='Clear all todos'
-				>
-					Clear Completed
-				</CompletedButton>
-			</TopFooter>
+				</p>
+			</ItemsLeft>
 			<FilterList>
 				{buttons.map((button) => (
 					<FilterItem key={button}>
@@ -42,7 +36,15 @@ const TodoActionFooter = () => {
 					</FilterItem>
 				))}
 			</FilterList>
-		</>
+			<CompletedButton>
+				<FilterButton
+					onClick={() => onClearCompleted()}
+					aria-label='Clear all todos'
+				>
+					Clear Completed
+				</FilterButton>
+			</CompletedButton>
+		</Footer>
 	);
 };
 

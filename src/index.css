@@ -5,6 +5,8 @@
 		hsl(280, 87%, 65%) 100%
 	);
 
+	--primary: #3a7cfd;
+
 	--rounded: 5px;
 	--round: 50%;
 	--full-width: 100%;

@@ -31,6 +31,15 @@ export const SubmitButton = styled.button`
 	cursor: pointer;
 	transition: border-color var(--transition), background-color var(--transition);
 
+	&:focus:not(:focus-visible) {
+		outline: none;
+	}
+
+	&:focus-visible {
+		outline: 2px dashed var(--primary);
+		outline-offset: 3px;
+	}
+
 	@media only screen and (min-width: 34.375em) {
 		height: 2.4rem;
 		width: 2.4rem;

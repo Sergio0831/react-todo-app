@@ -53,8 +53,7 @@ const Todo = ({ todo, index }) => {
 			</TodoText>
 			<DeleteButton
 				type='button'
-				aria-label='alternative for screen readers'
-				title='alternative for other users'
+				aria-label={`Delete ${value} Todo`}
 				onClick={() => onDeleteTodo(id)}
 			>
 				<CrossIcon />

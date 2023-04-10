@@ -8,7 +8,7 @@ export const StyledHeader = styled.header`
 	grid-column: 1/ -1;
 	transition: background-image 0.5s ease;
 
-	@media only screen and (min-width: 34.375em) {
+	@media (min-width: 34.375em) {
 		background: url(${(props) => props.theme.bgImage}) no-repeat center;
 		background-size: cover;
 		height: 30rem;

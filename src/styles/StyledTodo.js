@@ -7,12 +7,19 @@ export const DeleteButton = styled.button`
 	border: none;
 	cursor: pointer;
 	opacity: 0;
-	visibility: hidden;
-	transition: opacity var(--transition), visibility var(--transition);
+	transition: opacity var(--transition);
+
+	&:focus:not(:focus-visible) {
+		outline: none;
+	}
+
+	&:focus-visible {
+		outline: 2px dashed var(--primary);
+		outline-offset: 3px;
+	}
 
 	@media only screen and (max-width: 34.375em), only screen and (hover: none) {
 		opacity: 1;
-		visibility: visible;
 	}
 `;
 
