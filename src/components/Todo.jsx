@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import {
 	StyledTodo,
 	Label,
@@ -33,6 +33,8 @@ const Todo = ({ todo, index }) => {
 			value={todo}
 			dragListener={false}
 			dragControls={controls}
+			// dragConstraints={constraintsRef}
+			dragElastic={0.4}
 		>
 			<Label htmlFor={id}>
 				<Checkbox

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../theme/BreakPoints';
 
 export const StyledTodoForm = styled.form`
 	display: grid;
@@ -12,7 +13,7 @@ export const StyledTodoForm = styled.form`
 	border-radius: 5px;
 	transition: background-color var(--transition), box-shadow var(--transition);
 
-	@media only screen and (min-width: 34.375em) {
+	@media ${device.mobile} {
 		margin-bottom: 2.4rem;
 		column-gap: 2.4rem;
 		padding: 2rem 2.4rem;
@@ -40,7 +41,7 @@ export const SubmitButton = styled.button`
 		outline-offset: 3px;
 	}
 
-	@media only screen and (min-width: 34.375em) {
+	@media ${device.mobile} {
 		height: 2.4rem;
 		width: 2.4rem;
 	}
@@ -61,7 +62,7 @@ export const ButtonContainer = styled.div`
 		background-image: var(--gradient);
 		transition: transform var(--transition);
 
-		@media only screen and (min-width: 34.375em) {
+		@media ${device.mobile} {
 			height: 2.4rem;
 			width: 2.4rem;
 		}
@@ -104,7 +105,7 @@ export const Input = styled.input`
 		transition: color var(--transition);
 	}
 
-	@media only screen and (min-width: 34.375em) {
+	@media ${device.mobile} {
 		font-size: 1.8rem;
 		line-height: 1.8rem;
 		letter-spacing: -0.25px;

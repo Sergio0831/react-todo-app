@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro';
 import { fadeInTop, fadeOutTop } from './animation';
+import { device } from '../theme/BreakPoints';
 
 export const StyledAlert = styled.div`
 	position: absolute;
@@ -18,7 +19,7 @@ export const StyledAlert = styled.div`
 	border-radius: 0.313rem;
 	transition: transform var(--transition);
 
-	@media only screen and (min-width: 34.375em) {
+	@media ${device.mobile} {
 		width: 32rem;
 		height: 4.8rem;
 	}

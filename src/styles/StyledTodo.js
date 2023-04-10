@@ -1,12 +1,13 @@
 import styled from 'styled-components/macro';
 import iconCheck from '../images/icon-check.svg';
 import { motion } from 'framer-motion';
+import { device } from '../theme/BreakPoints';
 
 export const DeleteButton = styled.button`
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
-	opacity: 0;
+	opacity: 1;
 	transition: opacity var(--transition);
 
 	&:focus:not(:focus-visible) {
@@ -18,8 +19,8 @@ export const DeleteButton = styled.button`
 		outline-offset: 3px;
 	}
 
-	@media only screen and (max-width: 34.375em), only screen and (hover: none) {
-		opacity: 1;
+	@media (hover: hover) {
+		opacity: 0;
 	}
 `;
 
@@ -38,17 +39,12 @@ export const StyledTodo = styled(motion.li)`
 
 	&:hover ${DeleteButton} {
 		opacity: 1;
-		visibility: visible;
 	}
 
-	@media only screen and (min-width: 34.375em) {
+	@media ${device.mobile} {
 		padding: 2rem 2.4rem;
 		grid-template-columns: min-content 1fr min-content;
 	}
-`;
-
-export const Label = styled.label`
-	cursor: pointer;
 `;
 
 export const TodoText = styled.div`
@@ -71,7 +67,7 @@ export const TodoText = styled.div`
 			props.isCompleted ? 'line-through' : 'none'};
 	}
 
-	@media only screen and (min-width: 34.375em) {
+	@media ${device.mobile} {
 		padding-left: 2.4rem;
 		padding-right: 2.4rem;
 	}
@@ -84,11 +80,13 @@ export const CustomCheckbox = styled.div`
 	height: 2rem;
 	border: 1px solid ${(props) => props.theme.todoBorderBottom};
 	border-radius: 50%;
-	background: transparent;
+	background-color: ${(props) => props.theme.todoActionBg};
+	z-index: 15;
 	cursor: pointer;
-	transition: opacity var(--transition), border-color var(--transition);
+	transition: opacity var(--transition), border-color var(--transition),
+		background-color var(--transition);
 
-	@media only screen and (min-width: 34.375em) {
+	@media ${device.mobile} {
 		width: 2.4rem;
 		height: 2.4rem;
 	}
@@ -98,8 +96,8 @@ export const CustomCheckbox = styled.div`
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: 100%;
-		height: 100%;
+		width: var(--full-width);
+		height: var(--full-height);
 		background-image: url(${iconCheck}),
 			linear-gradient(to bottom right, #57ddff, #c058f3);
 		background-repeat: no-repeat;
@@ -109,32 +107,7 @@ export const CustomCheckbox = styled.div`
 		opacity: 0;
 		border: 1px solid transparent;
 		background-origin: border-box;
-	}
-
-	&::after {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		border: 1px solid transparent;
-		border-radius: 50%;
-		background: linear-gradient(135deg, rgb(87, 221, 255), rgb(192, 88, 243))
-			border-box border-box;
-		-webkit-mask: linear-gradient(
-					rgb(255, 255, 255) 0px,
-					rgb(255, 255, 255) 0px
-				)
-				padding-box padding-box,
-			linear-gradient(rgb(255, 255, 255) 0px, rgb(255, 255, 255) 0px);
-		mask: linear-gradient(rgb(255, 255, 255) 0px, rgb(255, 255, 255) 0px)
-				padding-box padding-box,
-			linear-gradient(rgb(255, 255, 255) 0px, rgb(255, 255, 255) 0px);
-		-webkit-mask-composite: destination-out;
-		mask-composite: destination-out;
-		opacity: 0;
-		transition: opacity var(--transition);
+		z-index: 10;
 	}
 `;
 
@@ -145,11 +118,49 @@ export const Checkbox = styled.input`
 	overflow: hidden;
 	clip: rect(0 0 0 0);
 
+	&:focus:not(:focus-visible) + ${CustomCheckbox} {
+		outline: none;
+	}
+
+	&:focus-visible + ${CustomCheckbox} {
+		outline: 2px dashed var(--primary);
+		outline-offset: 3px;
+	}
+
 	&:checked + ${CustomCheckbox} {
 		border: transparent;
 
 		::before {
 			opacity: 1;
+		}
+	}
+`;
+
+export const Label = styled.label`
+	cursor: pointer;
+	position: relative;
+
+	&::after {
+		content: '';
+		position: absolute;
+		width: var(--full-width);
+		height: var(--full-height);
+		top: 0;
+		left: 0;
+		z-index: 5;
+		transform: scale(0.9);
+		border-radius: var(--round);
+		background-image: var(--gradient);
+		transition: transform var(--transition);
+	}
+
+	&:hover {
+		${CustomCheckbox} {
+			border-color: transparent;
+		}
+
+		&::after {
+			transform: scale(1.1);
 		}
 	}
 `;

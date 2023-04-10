@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import { device } from '../theme/BreakPoints';
 
 export const TodoContainer = styled.div`
 	max-width: 90vw;
@@ -8,7 +9,7 @@ export const TodoContainer = styled.div`
 	grid-column: 1/ -1;
 	margin-top: 4.8rem;
 
-	@media only screen and (min-width: 34.375em) {
+	@media ${device.mobile} {
 		max-width: 54rem;
 		margin-top: 7rem;
 	}
@@ -20,7 +21,7 @@ export const TodoHeader = styled.div`
 	justify-content: space-between;
 	align-items: center;
 
-	@media only screen and (min-width: 34.375em) {
+	@media ${device.mobile} {
 		margin-bottom: 5rem;
 	}
 `;
@@ -34,7 +35,7 @@ export const Title = styled.h1`
 	color: #fff;
 	text-transform: uppercase;
 
-	@media only screen and (min-width: 34.375em) {
+	@media ${device.mobile} {
 		font-size: 4rem;
 		line-height: 4rem;
 	}
