@@ -29,10 +29,10 @@ It may look like a simple project with add and delete functionality. But the des
 
 ### What I learned
 
-    * How to use Framer Motion
-    * Complex responsive layout
-    * React Context API
-    * Gradient border color on hover
+- How to use Framer Motion
+- Complex responsive layout
+- React Context API
+- Gradient border color on hover
 
 ### Continued development
 
