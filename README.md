@@ -6,7 +6,7 @@ This is a solution to the [Todo app challenge on Frontend Mentor](https://www.fr
 
 ### Screenshot
 
-![Design preview for the Todo app coding challenge](./desktop-preview.jpg)
+![Design preview for the Todo app coding challenge](./screenshot.png)
 
 ### Links
 
@@ -14,6 +14,8 @@ This is a solution to the [Todo app challenge on Frontend Mentor](https://www.fr
 - Live Site URL: [https://www.frontendmentor.io/solutions/javascript-todo-app-with-nice-alert-animation-and-drag-and-drop-Tqsd_NQ7Z](https://www.frontendmentor.io/solutions/javascript-todo-app-with-nice-alert-animation-and-drag-and-drop-Tqsd_NQ7Z)
 
 ## My process
+
+It may look like a simple project with add and delete functionality. But the design of this project presents many challenges. Different layouts on desktop and mobile screens, dark and light themes, hover states. This project was built with React. For state management, I used the React Context API, and for animation, I used Framer Motion. I did not fully finish this project, but I always return to add something more.
 
 ### Built with
 
@@ -27,18 +29,14 @@ This is a solution to the [Todo app challenge on Frontend Mentor](https://www.fr
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
-
-To see how you can add code snippets, see below:
+    * How to use Framer Motion
+    * Complex responsive layout
+    * React Context API
+    * Gradient border color on hover
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-### Useful resources
-
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+Framer Motion is a great library for animation. and I'll use it in my projects in the future. Simple animations can be created using only CSS, but when you need to animate when a component leaves the DOM or drag and drop functionality, Framer Motion is a great solution for that. As well, I found that positioning elements can be easily implemented with a grid instead of position relative and absolute. In every next projects I use more grid layout.
 
 ## Author
 
@@ -49,4 +47,4 @@ Use this section to outline areas that you want to continue focusing on in futur
 
 ## Acknowledgments
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
+When I completed this project, I looked at other people's solutions. And it's so great to see so many different solutions just for one project.
